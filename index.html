@@ -22,9 +22,24 @@
 
         await liff.init({ liffId: liffId });
 
-        status.textContent = liff.isLoggedIn()
-          ? 'LIFF初期化成功：ログイン済み'
-          : 'LIFF初期化成功：未ログイン';
+        if (liff.isLoggedIn()) {
+
+  const profile = await liff.getProfile();
+
+  if (profile.userId) {
+    status.textContent =
+      'LIFF初期化成功：LINEユーザーID取得成功';
+  } else {
+    status.textContent =
+      'LIFF初期化成功：LINEユーザーID取得失敗';
+  }
+
+} else {
+
+  status.textContent =
+    'LIFF初期化成功：未ログイン';
+
+}
 
       } catch (error) {
         status.textContent = 'LIFF初期化エラー';
