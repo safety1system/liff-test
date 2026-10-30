@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIFF初期化テスト</title>
+</head>
+<body>
+  <h2>LIFF初期化テスト</h2>
+  <p id="status">確認前</p>
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    async function initializeLiff() {
+      const status = document.getElementById('status');
+
+      status.textContent = 'LIFF初期化中...';
+
+      try {
+        // STEP287でLINE DevelopersのLIFF IDを設定する
+        const liffId = 'YOUR_LIFF_ID';
+
+        await liff.init({ liffId: liffId });
+
+        status.textContent = liff.isLoggedIn()
+          ? 'LIFF初期化成功：ログイン済み'
+          : 'LIFF初期化成功：未ログイン';
+
+      } catch (error) {
+        status.textContent = 'LIFF初期化エラー';
+        console.error(error);
+      }
+    }
+
+    initializeLiff();
+  </script>
+</body>
+</html>
