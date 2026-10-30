@@ -27,9 +27,18 @@
   const profile = await liff.getProfile();
 
   if (profile.userId) {
+
+  const idToken = liff.getIDToken();
+
+  if (idToken) {
     status.textContent =
-      'LIFF初期化成功：LINEユーザーID取得成功';
+      'LIFF初期化成功：IDトークン取得成功';
   } else {
+    status.textContent =
+      'LIFF初期化成功：IDトークン取得失敗';
+  }
+
+} else {
     status.textContent =
       'LIFF初期化成功：LINEユーザーID取得失敗';
   }
